@@ -1,0 +1,34 @@
+.button
+
+  &.is-active
+    background: $is-primary
+    border-color: $is-primary
+    color: $white
+    box-shadow: none
+
+  &.is-primary
+    background-color: $is-primary
+    border-color: transparent
+    color: $white
+
+    &:hover
+      background-color: lighten($is-primary, 5%)
+
+  &:focus
+    border-color: lighten($black, 5%)
+    box-shadow: none
+
+  &.is-success
+    background: $is-success
+
+    &:hover
+      background: lighten($is-success, 3%)
+
+
+.back-button
+  position: absolute
+  bottom: 0
+  left: 0
+  width: 100%
+
+

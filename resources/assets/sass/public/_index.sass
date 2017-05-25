@@ -1,0 +1,65 @@
+#app
+  display: flex
+  align-items: center
+  justify-content: center
+  height: 100%
+
+#form-wrapper
+  width: 400px
+  height: 600px
+  display: flex
+  box-shadow: 0 19px 38px rgba($black, 0.30), 0 15px 12px rgba($black, 0.22)
+  overflow: hidden
+  position: relative
+  background: $white
+  border-radius: 3px
+
+  #inner-form-wrapper
+    width: 400 * 5px
+    height: inherit
+    position: absolute
+    top: 0
+    transition: all ease .3s
+
+    &.one
+      left: 0
+
+    &.two
+      left: -400px
+
+    &.three
+      left: -800px
+
+    &.four
+      left: -1200px
+
+    &.five
+      left: -1600px
+
+    .step
+      display: flex
+      width: 400px
+      height: 530px
+      float: left
+      flex-direction: column
+      position: relative
+
+      .column
+        padding: 12px
+        display: flex
+        justify-content: center
+        align-content: center
+        align-items: center
+        flex-direction: column
+
+        &.top
+          flex: 1
+
+        &.middle
+          flex: 1
+
+        &.bottom
+          flex: 1
+
+a
+  color: $is-primary
