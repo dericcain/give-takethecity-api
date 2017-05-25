@@ -34,7 +34,6 @@ class DonationController extends Controller
             $donation = new Donation;
             $response = $donation->process();
         } catch (\Exception $exception) {
-            dd($exception->getMessage(), request()->all());
             return response()->json(['error' => $exception->getMessage()], 422);
         }
 

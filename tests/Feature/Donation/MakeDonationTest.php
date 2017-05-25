@@ -47,10 +47,8 @@ class MakeDonationTest extends TestCase
 
         $response->assertStatus(201);
         $this->assertNotNull(RecurringDonation::all());
-        // todo: the designation is not being created...
-        // Causing received.blade.php to fail as well
-        $this->assertEquals($this->request['designation'], $recurringDonation->designation->id);
 
+        $this->assertEquals($this->request['designation'], $recurringDonation->designation->id);
     }
 
     /** @test */
@@ -85,6 +83,8 @@ class MakeDonationTest extends TestCase
     {
         parent::setUp();
 
+        $this->seed('DesignationSeeder');
+
         $this->creditCard = [
             'card' => [
                 'number' => '4242424242424242',
@@ -110,5 +110,4 @@ class MakeDonationTest extends TestCase
             'is_covering_fees' => false
         ];
     }
-
 }
