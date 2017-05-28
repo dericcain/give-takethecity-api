@@ -45,7 +45,7 @@ class ChargeRecurringDonationTest extends TestCase
             'name_on_card' => 'Deric Cain',
             'token' => $this->getToken(),
             'total' => 2000,
-            'is_covering_fees' => true
+            'is_paying_fees' => true
         ];
 
         $this->createCustomerInStripe();

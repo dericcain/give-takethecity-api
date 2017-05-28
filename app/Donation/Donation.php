@@ -17,7 +17,7 @@ class Donation
      */
     public function process()
     {
-        $this->donor = Donor::findByEmailOrPhone(request('email'), request('phone'));
+        $this->donor = Donor::findByEmailOrPhone(request()->json('email'), request()->json('phone'));
 
         if ($this->isNewDonor()) {
             $stripeCustomer = $this->createCustomerInStripe();
@@ -61,12 +61,12 @@ class Donation
     {
         $donor = Donor::create([
             'stripe_id' => $stripeCustomer->id,
-            'first_name' => request('first_name'),
-            'last_name' => request('last_name'),
-            'address' => request('address'),
-            'zip' => request('zip'),
-            'phone' => request('phone'),
-            'email' => request('email'),
+            'first_name' => request()->json('first_name'),
+            'last_name' => request()->json('last_name'),
+            'address' => request()->json('address'),
+            'zip' => request()->json('zip'),
+            'phone' => request()->json('phone'),
+            'email' => request()->json('email'),
         ]);
 
         return $donor;
@@ -78,7 +78,7 @@ class Donation
     private function updateStripeCustomer()
     {
         $stripeCustomer = new StripeCustomer;
-        $stripeCustomer->updateSource($this->donor, request('token'));
+        $stripeCustomer->updateSource($this->donor, request()->json('token'));
     }
 
     /**
@@ -86,7 +86,7 @@ class Donation
      */
     private function isRecurring(): bool
     {
-        return request('recurring') === true;
+        return request()->json('is_recurring') === true;
     }
 
     /**
@@ -96,12 +96,12 @@ class Donation
     {
         RecurringDonation::create([
             'donor_id' => $this->donor->id,
-            'amount' => request('total'),
+            'amount' => request()->json('amount'),
             'next_donation_on' => Carbon::now()->addMonth()->toDateString(),
-            'designation_id' => request('designation'),
-            'is_paying_fees' => request('is_covering_fees'),
-            'mission_support' => request('mission_support'),
-            'staff_support' => request('staff_support'),
+            'designation_id' => request()->json('designation'),
+            'is_paying_fees' => request()->json('is_paying_fees'),
+            'mission_support' => request()->json('mission_support'),
+            'staff_support' => request()->json('staff_support'),
         ]);
     }
 }

@@ -43,7 +43,7 @@ class RecurringDonationCharge
                 'designation' => $this->recurringDonation->designation,
                 'mission_support' => $this->recurringDonation->mission_support,
                 'staff_support' => $this->recurringDonation->staff_support,
-                'RECURRING' => true
+                'recurring' => true
             ]
         ], ['api_key' => config('services.stripe.secret')]);
     }

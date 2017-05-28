@@ -16,7 +16,6 @@
     "stripe/stripe-php": "^4.4"
   },
   "require-dev": {
-    "barryvdh/laravel-debugbar": "v2.3.2",
     "barryvdh/laravel-ide-helper": "v2.3.0",
     "doctrine/dbal": "2.3.5",
     "fzaninotto/faker": "~1.4",

@@ -10,6 +10,14 @@ class Donor extends Model
     protected $guarded = [];
 
     /**
+     * @param $phone
+     */
+    public function setPhoneAttribute($phone)
+    {
+        $this->attributes['phone'] = Phone::onlyNumbers($phone);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function recurringDonation()

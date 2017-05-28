@@ -45,12 +45,12 @@ class Charge
     {
         $this->donation = DbDonation::create([
             'donor_id' => $this->donor->id,
-            'amount' => request('total'),
-            'is_paying_fees' => request('is_covering_fees'),
-            'is_recurring' => request('recurring'),
-            'designation_id' => request('designation'),
-            'mission_support' => request('mission_support'),
-            'staff_support' => request('staff_support'),
+            'amount' => request()->json('amount'),
+            'is_paying_fees' => request()->json('is_paying_fees'),
+            'is_recurring' => request()->json('is_recurring'),
+            'designation_id' => request()->json('designation'),
+            'mission_support' => request()->json('mission_support'),
+            'staff_support' => request()->json('staff_support'),
         ]);
     }
 
@@ -60,14 +60,14 @@ class Charge
     private function chargeDonor()
     {
         return \Stripe\Charge::create([
-            'amount' => request('total'),
+            'amount' => request()->json('amount'),
             'currency' => 'usd',
             'customer' => $this->donor->stripe_id,
             'metadata' => [
-                'designation' => request('designation'),
-                'mission_support' => request('mission_support') ?? 'none',
-                'staff_support' => request('staff_support') ?? 'none',
-                'is_covering_fees' => request('is_covering_fees')
+                'designation' => request()->json('designation'),
+                'mission_support' => request()->json('mission_support') ?? 'none',
+                'staff_support' => request()->json('staff_support') ?? 'none',
+                'is_paying_fees' => request()->json('is_paying_fees')
             ]
         ], ['api_key' => config('services.stripe.secret')]);
     }

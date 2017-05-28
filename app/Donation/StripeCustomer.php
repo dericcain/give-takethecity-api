@@ -17,15 +17,15 @@ class StripeCustomer
     public function create()
     {
         return Customer::create([
-            'description' => request('last_name') . ', ' . request('first_name'),
-            'email' => request('email'),
-            'source' => request('token'),
+            'description' => request()->json('last_name') . ', ' . request()->json('first_name'),
+            'email' => request()->json('email'),
+            'source' => request()->json('token'),
             'metadata' => [
-                'first_name' => request('first_name'),
-                'last_name' => request('last_name'),
-                'address' => request('address'),
-                'zip' => request('zip'),
-                'phone' => request('phone'),
+                'first_name' => request()->json('first_name'),
+                'last_name' => request()->json('last_name'),
+                'address' => request()->json('address'),
+                'zip' => request()->json('zip'),
+                'phone' => request()->json('phone'),
             ]
         ], ['api_key' => config('services.stripe.secret')]);
     }

@@ -9,7 +9,8 @@ class Donation extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'is_paying_fees' => 'boolean'
+        'is_paying_fees' => 'boolean',
+        'is_recurring' => 'boolean'
     ];
 
     /**

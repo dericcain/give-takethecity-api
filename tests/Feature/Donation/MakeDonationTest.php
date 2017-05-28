@@ -34,20 +34,19 @@ class MakeDonationTest extends TestCase
      */
     private function postDonationRequest()
     {
-        return $this->post('/api/donations', $this->request);
+        return $this->postJson('/api/donations', $this->request);
     }
 
     /** @test */
     function if_a_donation_is_recurring_it_is_inserted_into_the_database()
     {
-        $this->request['recurring'] = true;
+        $this->request['is_recurring'] = true;
 
         $response = $this->postDonationRequest();
-        $recurringDonation = RecurringDonation::whereAmount($this->request['total'])->first();
+        $recurringDonation = RecurringDonation::whereAmount($this->request['amount'])->first();
 
         $response->assertStatus(201);
         $this->assertNotNull(RecurringDonation::all());
-
         $this->assertEquals($this->request['designation'], $recurringDonation->designation->id);
     }
 
@@ -96,7 +95,7 @@ class MakeDonationTest extends TestCase
 
         $this->request = [
             'amount' => 2000,
-            'recurring' => false,
+            'is_recurring' => false,
             'designation' => 1,
             'first_name' => 'Deric',
             'last_name' => 'Cain',
@@ -106,8 +105,7 @@ class MakeDonationTest extends TestCase
             'email' => 'deric.cain@gmail.com',
             'name_on_card' => 'Deric Cain',
             'token' => $this->getToken(),
-            'total' => 2000,
-            'is_covering_fees' => false
+            'is_paying_fees' => false
         ];
     }
 }
