@@ -30,4 +30,6 @@ class DonationReceived extends Mailable
     {
         return $this->markdown('emails.donations.received');
     }
+
+
 }

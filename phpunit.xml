@@ -25,6 +25,8 @@
             <directory suffix=".php">./app/Http/Controllers/Auth</directory>
             <directory suffix=".php">./app/Http/Middleware</directory>
             <directory suffix=".php">./app/Http/Exceptions</directory>
+            <directory suffix=".php">./app/Exceptions</directory>
+            <directory suffix=".php">./app/Providers</directory>
         </blacklist>
     </filter>
     <php>

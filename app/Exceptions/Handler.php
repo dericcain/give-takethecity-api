@@ -44,24 +44,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if ($exception instanceof \Stripe\RateLimit)
-        {
-            return response()->json([
-                'error' =>
-                    'It looks like our payment processor was busy. Please try again in a few minutes.'
-            ], 422);
-        }
-
-        if ($exception instanceof \Stripe\Api ||
-            $exception instanceof \Stripe\ApiConnection ||
-            $exception instanceof \Stripe\Authentication ||
-            $exception instanceof \Stripe\InvalidRequest ||
-            $exception instanceof \Stripe\ApiRequestor ||
-            $exception instanceof \Stripe\Base)
-        {
-            return response()->json(['error' => $exception->getMessage()], 422);
-        }
-
         return parent::render($request, $exception);
     }
 

@@ -38,6 +38,17 @@ class MakeDonationTest extends TestCase
     }
 
     /** @test */
+    function an_error_is_thrown_when_an_invalid_card_is_used()
+    {
+        $this->creditCard['card']['number'] = '4000000000000002';
+        $this->request['token'] = $this->getToken();
+
+        $response = $this->postDonationRequest();
+
+        $response->assertStatus(422);
+    }
+
+    /** @test */
     function if_a_donation_is_recurring_it_is_inserted_into_the_database()
     {
         $this->request['is_recurring'] = true;
