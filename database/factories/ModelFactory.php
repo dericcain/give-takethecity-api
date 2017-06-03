@@ -56,8 +56,8 @@ $factory->define(App\Donation::class, function (Faker\Generator $faker) {
     return [
         'donor_id' => 1,
         'amount' => $faker->numberBetween(1000, 100000),
-        'is_recurring' => false,
+        'is_recurring' => $faker->boolean(12),
         'designation_id' => $faker->numberBetween(1, 5),
-        'is_paying_fees' => false
+        'is_paying_fees' => $faker->boolean()
     ];
 });

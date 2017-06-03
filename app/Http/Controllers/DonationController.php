@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Donation as DBDonation;
 use App\Donation\Donation;
-use App\Http\Requests\DonationRequest;
 
 class DonationController extends Controller
 {
-
     /**
-     * Display the home page.
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function create()
+    public function index()
     {
-        return view('donations.create');
+        return response()->json([
+            'donations' => DBDonation::with('donor', 'designation')->get()
+        ]);
     }
 
     /**

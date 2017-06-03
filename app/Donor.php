@@ -9,12 +9,21 @@ class Donor extends Model
 {
     protected $guarded = [];
 
+    protected $appends = ['full_name'];
     /**
      * @param $phone
      */
     public function setPhoneAttribute($phone)
     {
         $this->attributes['phone'] = Phone::onlyNumbers($phone);
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name;
     }
 
     /**
