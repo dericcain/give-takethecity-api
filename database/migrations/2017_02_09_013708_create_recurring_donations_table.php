@@ -22,6 +22,7 @@ class CreateRecurringDonationsTable extends Migration
             $table->string('designation_id');
             $table->string('mission_support')->nullable()->default(null);
             $table->string('staff_support')->nullable()->default(null);
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

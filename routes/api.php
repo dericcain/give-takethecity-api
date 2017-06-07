@@ -9,4 +9,5 @@ Route::group([
     Route::get('/donors/{id}', 'DonorController@show');
     Route::get('/donations', 'DonationController@index');
     Route::get('/recurring-donations', 'RecurringDonationController@index');
+    Route::post('/recurring-donations/{id}', 'RecurringDonationController@update');
 });

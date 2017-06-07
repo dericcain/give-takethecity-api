@@ -10,6 +10,14 @@ class RecurringDonation extends Model
 {
     protected $guarded = [];
 
+    protected $casts = [
+        'is_active' => 'boolean'
+    ];
+
+    protected $dates = [
+        'next_donation_on'
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -51,6 +59,9 @@ class RecurringDonation extends Model
         ]);
     }
 
+    /**
+     * Make a charge to a recurring donation.
+     */
     public function charge()
     {
         $charge = new RecurringDonationCharge($this);
