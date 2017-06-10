@@ -28,7 +28,23 @@ class DonationReceived extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.donations.received');
+        return $this->markdown('emails.donations.received', [
+            'donationMessage' => $this->constructDonationMessage()
+        ]);
+    }
+
+    /**
+     * @return string
+     */
+    private function constructDonationMessage()
+    {
+        if ($this->donation->is_recurring) {
+            return 'You gave a recurring donation of <strong>$' . number_format($this->donation->amount / 100,
+                    2) . '</strong> and you designated your gift to <strong>' . $this->donation->designation->name . '.</strong>';
+        }
+
+        return 'You gave a one-time donation of <strong>$' . number_format($this->donation->amount / 100,
+                2) . '</strong> and you designated your gift to <strong>' . $this->donation->designation->name . '</strong>.';
     }
 
 

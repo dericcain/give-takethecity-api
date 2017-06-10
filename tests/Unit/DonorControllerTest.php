@@ -2,10 +2,10 @@
 
 namespace Tests\Unit;
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Tests\TestCase;
 
 class DonorControllerTest extends TestCase
 {
@@ -22,5 +22,17 @@ class DonorControllerTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertJson(['donor' => true]);
+    }
+
+    /** @test */
+    function gets_a_list_of_all_donors()
+    {
+        factory(\App\Donor::class, 20)->create();
+
+        $response = $this->json('GET', 'api/donors/');
+
+        $response->assertStatus(200);
+        $response->assertJson(['donors' => true]);
+        $this->assertCount(20, $response->json()['donors']);
     }
 }

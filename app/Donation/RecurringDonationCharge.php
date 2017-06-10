@@ -40,7 +40,7 @@ class RecurringDonationCharge
             'currency' => 'usd',
             'customer' => $this->donor->stripe_id,
             'metadata' => [
-                'designation' => $this->recurringDonation->designation,
+                'designation' => $this->recurringDonation->designation->name,
                 'mission_support' => $this->recurringDonation->mission_support,
                 'staff_support' => $this->recurringDonation->staff_support,
                 'recurring' => true

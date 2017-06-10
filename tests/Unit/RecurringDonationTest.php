@@ -4,9 +4,9 @@ namespace Tests\Unit;
 
 use App\RecurringDonation;
 use Carbon\Carbon;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestCase;
 
 class RecurringDonationTest extends TestCase
 {
@@ -37,6 +37,7 @@ class RecurringDonationTest extends TestCase
 
         $recurringDonation->updateNextDonationOn();
 
-        $this->assertEquals(Carbon::now()->addMonth()->toDateString(), $recurringDonation->next_donation_on);
+        $this->assertEquals(Carbon::now()->addMonth()->toDateString(),
+            $recurringDonation->next_donation_on->toDateString());
     }
 }

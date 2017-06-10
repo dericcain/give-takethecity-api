@@ -18,8 +18,9 @@ class CreateDonationsTable extends Migration
             $table->unsignedInteger('donor_id');
             $table->boolean('is_paying_fees')->default(false);
             $table->unsignedInteger('designation_id');
-            $table->string('mission_support')->nullable()->default(null);
-            $table->string('staff_support')->nullable()->default(null);
+            $table->text('general_comments')->nullable()->default(null);
+            $table->text('mission_support')->nullable()->default(null);
+            $table->text('staff_support')->nullable()->default(null);
             $table->boolean('is_recurring')->default(false);
             $table->integer('amount');
             $table->timestamps();

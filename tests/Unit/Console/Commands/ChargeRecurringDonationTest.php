@@ -21,6 +21,7 @@ class ChargeRecurringDonationTest extends TestCase
     public function setUp()
     {
         parent::setUp();
+        $this->seed('DesignationSeeder');
 
         $this->creditCard = [
             'card' => [
@@ -54,6 +55,8 @@ class ChargeRecurringDonationTest extends TestCase
     /** @test */
     function recurring_donations_process_all_donations_that_are_due_today()
     {
+        $this->disableExceptionHandling();
+
         $donor = factory(Donor::class)->create([
             'stripe_id' => $this->stripeCustomer->id
         ]);

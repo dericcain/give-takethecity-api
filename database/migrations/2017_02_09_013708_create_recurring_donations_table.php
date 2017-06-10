@@ -20,6 +20,7 @@ class CreateRecurringDonationsTable extends Migration
             $table->date('next_donation_on');
             $table->boolean('is_paying_fees')->default(false);
             $table->string('designation_id');
+            $table->string('general_comments')->nullable()->default(null);
             $table->string('mission_support')->nullable()->default(null);
             $table->string('staff_support')->nullable()->default(null);
             $table->boolean('is_active')->default(true);

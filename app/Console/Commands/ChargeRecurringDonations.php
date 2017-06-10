@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Donation\Charge;
 use App\RecurringDonation;
 use Illuminate\Console\Command;
 
@@ -49,7 +48,7 @@ class ChargeRecurringDonations extends Command
     {
         $recurringDonations = RecurringDonation::needChargingToday();
 
-        if($recurringDonations->count()) {
+        if ($recurringDonations->isNotEmpty()) {
             $recurringDonations->each->charge();
         }
     }

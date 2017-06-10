@@ -49,6 +49,7 @@ class Charge
             'is_paying_fees' => request()->json('is_paying_fees'),
             'is_recurring' => request()->json('is_recurring'),
             'designation_id' => request()->json('designation'),
+            'general_comments' => request()->json('general_comments'),
             'mission_support' => request()->json('mission_support'),
             'staff_support' => request()->json('staff_support'),
         ]);
@@ -64,7 +65,8 @@ class Charge
             'currency' => 'usd',
             'customer' => $this->donor->stripe_id,
             'metadata' => [
-                'designation' => request()->json('designation'),
+                'designation' => $this->donation->designation->name,
+                'general_comments' => request()->json('general_comments') ?? 'none',
                 'mission_support' => request()->json('mission_support') ?? 'none',
                 'staff_support' => request()->json('staff_support') ?? 'none',
                 'is_paying_fees' => request()->json('is_paying_fees')

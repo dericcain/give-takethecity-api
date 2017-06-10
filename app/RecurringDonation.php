@@ -43,8 +43,9 @@ class RecurringDonation extends Model
     public function scopeNeedChargingToday($query)
     {
         return $query->with('donor')
-            ->where('next_donation_on', Carbon::now()->toDateString())
-            ->get();
+                     ->whereDate('next_donation_on', Carbon::now()->toDateString())
+                     ->where('is_active', true)
+                     ->get();
     }
 
     /**

@@ -16,6 +16,13 @@ class StripeCustomerTest extends TestCase
 
     protected $creditCard;
 
+    /** @test */
+    function a_customer_is_created_in_stripe()
+    {
+        $customer = new StripeCustomer;
+        $customer->create();
+    }
+
     protected function setUp()
     {
         parent::setUp();
@@ -45,16 +52,4 @@ class StripeCustomerTest extends TestCase
         $this->createCustomerInStripe();
     }
 
-    /** @test */
-    function a_customer_is_created_in_stripe()
-    {
-        $customer = new StripeCustomer;
-        $customer->create();
-    }
-
-    /**  */
-    function a_customers_information_is_updated_in_stripe()
-    {
-
-    }
 }
