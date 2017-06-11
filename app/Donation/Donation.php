@@ -100,6 +100,7 @@ class Donation
             'next_donation_on' => Carbon::now()->addMonth()->toDateString(),
             'designation_id' => request()->json('designation'),
             'is_paying_fees' => request()->json('is_paying_fees'),
+            'general_comments' => request()->json('general_comments'),
             'mission_support' => request()->json('mission_support'),
             'staff_support' => request()->json('staff_support'),
         ]);

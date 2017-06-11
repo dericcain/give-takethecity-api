@@ -40,4 +40,17 @@ class RecurringDonationTest extends TestCase
         $this->assertEquals(Carbon::now()->addMonth()->toDateString(),
             $recurringDonation->next_donation_on->toDateString());
     }
+
+    /** @test */
+    function a_recurring_donation_has_general_comments()
+    {
+        $comment = 'This is a comment';
+        $recurringDonation = factory(RecurringDonation::class)->create([
+            'general_comments' => $comment
+        ]);
+
+        $recurringDonationFromDb = RecurringDonation::find($recurringDonation->id);
+
+        $this->assertEquals($recurringDonationFromDb->general_comments, $comment);
+    }
 }
