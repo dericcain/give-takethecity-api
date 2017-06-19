@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Designation;
 use App\Donation;
 use App\Donation\DonationReceipt;
 use App\Donor;
@@ -33,5 +34,35 @@ class DonationReceiptTest extends TestCase
         Mail::assertSent(DonationReceived::class, function($mail) use ($donor) {
             return $mail->donation->donor->email == $donor->email;
         });
+    }
+
+    /** @test */
+    function an_email_with_a_specific_designation_has_a_bcc()
+    {
+        Mail::fake();
+
+        $designation = factory(Designation::class)->create();
+        $donor = factory(Donor::class)->create([
+            'email' => '8ef9419efd-14e949@inbox.mailtrap.io'
+        ]);
+        $donation = factory(Donation::class)->create([
+            'donor_id' => $donor->id,
+            'designation_id' => $designation->id
+        ]);
+
+        $donationReceipt = new DonationReceipt($donation);
+        $donationReceipt->send();
+
+        Mail::assertSent(DonationReceived::class, function ($mail) use ($donor, $designation) {
+            return $mail->donation->donor->email == $donor->email
+                && $mail->hasBcc('andrew@take-the-city.com')
+                && $mail->hasBcc($designation->email);
+        });
+    }
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->seed('DesignationSeeder');
     }
 }

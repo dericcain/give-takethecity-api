@@ -66,7 +66,7 @@ class MakeDonationTest extends TestCase
     {
         $this->postDonationRequest();
 
-        $donor = Donor::findByEmailOrPhone($this->request['email'], $this->request['phone']);
+        $donor = Donor::findByEmail($this->request['email']);
 
         $this->assertEquals(1, $donor->count());
     }

@@ -61,3 +61,12 @@ $factory->define(App\Donation::class, function (Faker\Generator $faker) {
         'is_paying_fees' => $faker->boolean()
     ];
 });
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Designation::class, function (Faker\Generator $faker) {
+
+    return [
+        'name' => 'Eminent Worship',
+        'email' => 'test@test.com',
+    ];
+});

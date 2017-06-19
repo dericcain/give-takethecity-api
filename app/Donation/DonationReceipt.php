@@ -24,6 +24,25 @@ class DonationReceipt
      */
     public function send()
     {
-        Mail::to($this->donation->donor->email)->send(new DonationReceived($this->donation));
+        Mail::to($this->donation->donor->email)
+            ->bcc($this->getUsersToEmail())
+            ->send(new DonationReceived($this->donation));
+    }
+
+    /**
+     * Sometimes we need to email other users because the donation is for them.
+     *
+     * @return array|string
+     */
+    public function getUsersToEmail()
+    {
+        if (!is_null($this->donation->designation->email)) {
+            return [
+                $this->donation->designation->email,
+                'andrew@take-the-city.com'
+            ];
+        }
+
+        return 'andrew@take-the-city.com';
     }
 }

@@ -35,6 +35,9 @@ class Charge
         $response = $this->chargeDonor();
         $this->sendEmailReceipt();
 
+        // TODO: Send email to Andrew and others if needed
+        // @author Deric Cain on 6/12/17
+
         return $response;
     }
 
@@ -74,6 +77,9 @@ class Charge
         ], ['api_key' => config('services.stripe.secret')]);
     }
 
+    /**
+     * Send an email receipt the the donor.
+     */
     private function sendEmailReceipt()
     {
         $emailReceipt = new DonationReceipt($this->donation);
