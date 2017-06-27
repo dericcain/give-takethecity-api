@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Donation\FakePaymentGateway;
 use App\Donor;
 use App\RecurringDonation;
 use Illuminate\Foundation\Testing\DatabaseMigrations;

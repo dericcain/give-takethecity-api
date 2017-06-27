@@ -17,7 +17,7 @@ class Donation
      */
     public function process()
     {
-        $this->donor = Donor::findByEmailOrPhone(request()->json('email'), request()->json('phone'));
+        $this->donor = Donor::findByEmail(request()->json('email'));
 
         if ($this->isNewDonor()) {
             $stripeCustomer = $this->createCustomerInStripe();

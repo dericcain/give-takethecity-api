@@ -24,6 +24,8 @@ class DonationController extends Controller
      */
     public function store()
     {
+        \Log::info(print_r(request()->all()));
+
         try {
             $donation = new Donation;
             $response = $donation->process();
