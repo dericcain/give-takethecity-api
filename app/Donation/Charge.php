@@ -36,7 +36,7 @@ class Charge
         $this->sendEmailReceipt();
 
         // TODO: Send email to Andrew and others if needed
-        // @author Deric Cain on 6/12/17
+
 
         return $response;
     }

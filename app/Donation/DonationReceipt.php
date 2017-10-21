@@ -2,6 +2,7 @@
 namespace App\Donation;
 
 use App\Mail\DonationReceived;
+use App\Mail\DonationReceivedAdmin;
 use Illuminate\Support\Facades\Mail;
 
 class DonationReceipt
@@ -24,9 +25,13 @@ class DonationReceipt
      */
     public function send()
     {
+        // Send the email to the donor
         Mail::to($this->donation->donor->email)
-            ->bcc($this->getUsersToEmail())
             ->send(new DonationReceived($this->donation));
+
+        // Send the email to the admin team
+        Mail::to($this->getUsersToEmail())
+            ->send(new DonationReceivedAdmin($this->donation));
     }
 
     /**
