@@ -44,6 +44,10 @@
         <td>{{ $donation->donor->phone }}</td>
     </tr>
     <tr>
+        <td width="120">Address</td>
+        <td>{{ $donation->donor->address }} {{ $donation->donor->zip }}</td>
+    </tr>
+    <tr>
         <td width="120">Is recurring</td>
         <td>{{ $donation->is_recurring == 1 ? 'Yes' : 'No' }}</td>
     </tr>
